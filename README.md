@@ -64,6 +64,6 @@ Archetype documentation and coding standard
         * %Place-Holder-Selector
         * Property Ordering
         * Sass Packages and Modules
-    * HTML Coding Standard
-    * JavaScript Coding Standard
+  3. HTML Coding Standard
+  4. JavaScript Coding Standard
 
