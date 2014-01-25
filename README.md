@@ -48,7 +48,6 @@ Archetype documentation and coding standard
         * Namespacing   (??)
         * Class Semantics
         * Specificity
-
     * Stylesheet Coding Standard
       * CSS Guidelines
         * General Principles
