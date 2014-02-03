@@ -42,7 +42,7 @@ An object or component should have only a single responsibility, and that respon
 Never directly edit the base styles (the object) of a component, unless you are certain you wish for this change to apply globally to all components that extend it. Use an additional class applied to the same instance of the base component to extend or overwrite the base component.  Extensions should not radically alter the end user’s expectation of an object’s functionality.
 
 #### Open/Closed Principle
-entities (classes, modules, functions, etc.) are open for extension, but closed for modification. Base rules may be extended, but not directly modifiable. This is why directly styling HTML tags is not acceptable - reduce the amount of global element styles in order to reduce the chances of breaking the open/closed principle [[7]](addendum.md) [9](addendum.md). Opt-in, never opt-out, in order to avoid redundant overrides and code bloat.
+entities (classes, modules, functions, etc.) are open for extension, but closed for modification. Base rules may be extended, but not directly modifiable. This is why directly styling HTML tags is not acceptable - reduce the amount of global element styles in order to reduce the chances of breaking the open/closed principle [[7]](addendum.md) [[9]](addendum.md). Opt-in, never opt-out, in order to avoid redundant overrides and code bloat.
 
 #### Composition over Inheritance
 Whenever possible, abstract specific functionality into isolation to be used to compose complete UI components.  Whenever similar code is being written more than once, look to abstract (i.e. vertical-spacing).  Standardizing similar styles cuts down on excess code and needless and/or inadvertent divergent implementation of similar patterns.
@@ -50,7 +50,7 @@ Whenever possible, abstract specific functionality into isolation to be used to 
 Composition takes place in the HTML applying classes directly to the elements you wish to style.
 
 #### Liskov Substitution Principle
-objects should be replaceable with instances or their sub-components without breaking. Sub-components that extend a module should be interchangeable with the base module itself. To keep true to this principlea module's subcomponent(s) should never affect layout [[7](addendum.md).
+objects should be replaceable with instances or their sub-components without breaking. Sub-components that extend a module should be interchangeable with the base module itself. To keep true to this principlea module's subcomponent(s) should never affect layout [[7]](addendum.md).
 
 #### Entity Segregation Principle
 It is sometimes better to have multiple base modules opposed to a single generic module with multiple sub-components. Never make sacrifices in functionality in the name of utility. Taken too far, code abstraction becomes  detrimental [[7]](addendum.md). When writing modular CSS, it's not about maintaining modularity in the actual code, but rather modularity in the actual design [[10]](addendum.md).

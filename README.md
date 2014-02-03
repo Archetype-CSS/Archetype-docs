@@ -35,4 +35,4 @@ Archetype documentation and coding standard
   4. [HTML Coding
      Standard](https://github.com/Archetype-CSS/Archetype-docs/blob/master/html-coding-standard.md#html-coding-standard)
   5. JavaScript Coding Standard
-
+  6. Progressive Enhancement
