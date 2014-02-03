@@ -12,8 +12,7 @@ Archetype documentation and coding standard
       Goals](https://github.com/Archetype-CSS/Archetype-docs/blob/master/Design-Principles.md#developer-centric-goals)
     * [Object Oriented
       Principles](https://github.com/Archetype-CSS/Archetype-docs/blob/master/Design-Principles.md#object-oriented-principles)
-  2.
-  [Architecture](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#architecture)
+  2. [Architecture](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#architecture)
     * [Partials](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#working-with-partials)
     * [Directory
       Structure](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#directory-structure)
