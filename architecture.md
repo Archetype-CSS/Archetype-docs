@@ -63,7 +63,7 @@ The temporary directory contains any styles that haven't yet been properly defin
   1. Separation of Structure from Skin - distinguish between structure styles (box-model) and skin styles (colorfontgradients) and abstract these styles in class-based modules to allow re-use [6](addendum.md).
   2. Separation of Container and Content - avoid all explicit parent-child relationship within style declarations so that a component's style is not dependant upon its container which allows the module to be reused [6](addendum.md).
 
-### Object Oriented Classes ~~( change this to:  component composition)~~
+### Component Composition (OOCSS Classes)
 
 Building complex components with smallermore discrete code blocks leads to more reusable codeeasier debuggingand a DRYer code base by cutting down on repetition. It also allows for easier prototyping within the browser when skin and structure styles can be applied to a component separately. A component is comprised of objectstructureand skin. Class naming and [selector construct]() is very important. This syntax and naming convention illustrates the intention of a class and its relationship to others.
 
