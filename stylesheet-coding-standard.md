@@ -25,7 +25,7 @@ Example:
 ```
 
 #### Object-Extension Pointer
-When extending an object within a separate partialleave a comment pointing to the original base object in order to establish a concrete link between the object and its extension [13].
+When extending an object within a separate partialleave a comment pointing to the original base object in order to establish a concrete link between the object and its extension [[13]](addendum.md).
 
 Example:
 ```css
@@ -53,7 +53,7 @@ Example:
 
 ```
 
-Long comma-separated property valuessuch as collections of gradients or shadowscan be arranged across multiple lines in an effort to improve readability and produce more useful diffs [3].
+Long comma-separated property valuessuch as collections of gradients or shadowscan be arranged across multiple lines in an effort to improve readability and produce more useful diffs [[3]](addendum.md).
 
 Example:
 
@@ -65,11 +65,11 @@ Example:
 ###### Units
 When building a responsive design system always try to use relative units to allow system components and font-size to scale to the user's viewport. Use pixels only when you have a really good reason NOT to use em's (or rems with fallback and abstract this into a Sass mixin).
 Use unit-less line-height. It does not inherit a percentage value of its parent element - it's based on a multiplier of the font-size.
-Avoid absolute measurements. For exampleby using .dropdown-nav li:hover { top: 37px; } you are coding a single point of failure into your interface. Insteadbuild with flexibility in mind by using .dropdown-nav li:hover { top: 100%; } [13].
-Consider using [Modular Scales]() to help define your proportional rhythms within your designs. The [Sassy Modular]() Scale Ruby Gem makes working with Modular Scales easy.
+Avoid absolute measurements. For exampleby using .dropdown-nav li:hover { top: 37px; } you are coding a single point of failure into your interface. Insteadbuild with flexibility in mind by using .dropdown-nav li:hover { top: 100%; } [[13]](addendum.md).
+Consider using [Modular Scales](http://alistapart.com/article/more-meaningful-typography) to help define your proportional rhythms within your designs. The [Sassy Modular](https://github.com/Team-Sass/modular-scale) Scale Ruby Gem makes working with Modular Scales easy.
  } }
 
->"By using culturally relevant historically pleasing ratios to create modular scales and basing the measurements in our compositions on values from those scales we can achieve a visual harmony not found in layouts that use arbitrary convention or easily divisible numbers." - [Tim Brown]()
+>"By using culturally relevant historically pleasing ratios to create modular scales and basing the measurements in our compositions on values from those scales we can achieve a visual harmony not found in layouts that use arbitrary convention or easily divisible numbers." - [Tim Brown](https://twitter.com/nicewebtype)
 
 
 ## Sass Guidelines
@@ -98,7 +98,7 @@ Use // comment syntax to omit comments from output.
   * When nestinglist your parent specific declarations directly under the class selector and then list the indented child selectors
   * Only use nesting when you intend for nested CSS selectors.
   * Never emulate HTML structure of a module with SCSS nesting. Mapping Sass selectors directly to your DOM structure creates a brittle architecture that is tightly coupled to the current HTML markup.
-  * Nested parent selectors should be listed directly under the class selector and then indent child selectors [17].
+  * Nested parent selectors should be listed directly under the class selector and then indent child selectors [[17]](addendum.md).
 
 Example:
 
@@ -123,7 +123,7 @@ Example:
   * 'Global' variablesthose used by many components within multiple different partial filesshould be given their own partial file inside the base/directory for example: _color-pallet.scss_typography-pallet.scss.
 
 ### Variable Syntax
-Use the same [BEM-style syntax]() used for CSS selectorsi.e. $object__element--property: css-value;. Variable names should list there common properties first followed by unique properties.
+Use the same [BEM-style syntax](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#selector-construct) used for CSS selectorsi.e. $object__element--property: css-value;. Variable names should list there common properties first followed by unique properties.
 
 Example:
 ```scss
@@ -153,7 +153,7 @@ Example:
   * Be cautious using @extend. Improper usage can easily cause bloated output and/or extremely lengthy selector strings.
   * Never nest an @extend within another @extend
   * Avoid using @extend within a mixin - this can easily lead to nested @extend's
-  * Never use @extend for the simplification of (OOCSS) multi-class constructs to build single-class objects. This is dangerous because it can easily produce very bloated output and complicated selector strings. This technique should be avoided until a native browser implementation of @extend is available[29].
+  * Never use @extend for the simplification of (OOCSS) multi-class constructs to build single-class objects. This is dangerous because it can easily produce very bloated output and complicated selector strings. This technique should be avoided until a native browser implementation of @extend is available[[29]](addendum.md).
 
 Example misuse of @extend:
 ```scss
