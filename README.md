@@ -4,65 +4,36 @@ Archetype documentation and coding standard
 
 ## Table of Contents
 
-  1. Front End Design Principles
-    * User Centric Goals
-    * Developer Centric Goals
-    * Object Oriented Principles
-      * Single Responsibility Principle
-      * Extension over Modification
-      * Open/Closed Principle
-      * Composition over Inheritance 
-      * Liskov Substitution Principle
-      * Entity Segregation Principle
-      * Minimize Coupling
-      * Encapsulation
-      * DRY
-      * Documentation
-    * Whitespace and Comments (?)
-  2. Architecture
-    * Partials
-    * Directory Structure
-      * Base
-      * Object
-      * Component
-      * Layout
-      * Utilities
-      * Temporary
-    * Object Oriented CSS (OOCSS)
-      * Principles of OOCSS
-      * Component Composition
-        * Object Styles
-        * Structure Styles
-        * Skin Styles
-        * Layout Styles
-      * Naming Convention and Structure
-        * Component
-        * Sub-Object
-        * Object Extension
-        * State
-        * Layout
-        * Icons
-        * JavaScript
-      * Selector Construct
-        * Naming Pattern
-        * Namespacing   (??)
-        * Class Semantics
-        * Specificity
-    * Stylesheet Coding Standard
-      * CSS Guidelines
-        * General Principles
-        * Whitespace and Comments
-        * Formating
-        * Units
-      * Sass Guidelines
-        * General Principles
-        * Nesting Selectors
-        * Variables 
-        * @mixins
-        * @extend
-        * %Place-Holder-Selector
-        * Property Ordering
-        * Sass Packages and Modules
-  3. HTML Coding Standard
-  4. JavaScript Coding Standard
+  1. [Front End Design
+     Principles](https://github.com/Archetype-CSS/Archetype-docs/blob/master/Design-Principles.md#archetype-design-principles)
+    * [User Centric
+      Goals](https://github.com/Archetype-CSS/Archetype-docs/blob/master/Design-Principles.md#user-centered-goals)
+    * [Developer Centric
+      Goals](https://github.com/Archetype-CSS/Archetype-docs/blob/master/Design-Principles.md#developer-centric-goals)
+    * [Object Oriented
+      Principles](https://github.com/Archetype-CSS/Archetype-docs/blob/master/Design-Principles.md#object-oriented-principles)
+  2.
+  [Architecture](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#architecture)
+    * [Partials](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#working-with-partials)
+    * [Directory
+      Structure](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#directory-structure)
+    * [Object Oriented CSS
+      (OOCSS)](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#object-oriented-css-oocss)
+      * [Principles of
+        OOCSS](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#two-main-principles-of-oocss)
+      * [Component
+        Composition](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#component-composition-oocss-classes)
+      * [Naming Convention and
+        Structure](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#naming-conventions-and-structure)
+      * [Selector
+        Construct](https://github.com/Archetype-CSS/Archetype-docs/blob/master/architecture.md#selector-construct)
+  3. [Stylesheet Coding
+     Standard](https://github.com/Archetype-CSS/Archetype-docs/blob/master/stylesheet-coding-standard.md#stylesheet-coding-standard)
+      * [CSS
+        Guidelines](https://github.com/Archetype-CSS/Archetype-docs/blob/master/stylesheet-coding-standard.md#css-guidelines)
+      * [Sass
+        Guidelines](https://github.com/Archetype-CSS/Archetype-docs/blob/master/stylesheet-coding-standard.md#css-guidelines)
+  4. [HTML Coding
+     Standard](https://github.com/Archetype-CSS/Archetype-docs/blob/master/html-coding-standard.md#html-coding-standard)
+  5. JavaScript Coding Standard
 
