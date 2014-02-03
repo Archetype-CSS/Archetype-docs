@@ -2,7 +2,7 @@
 
 Archetype documentation and coding standard
 
-## Archetype Docs Table of Contents
+## Table of Contents
 
   1. Front End Design Principles
     * User Centric Goals
