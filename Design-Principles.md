@@ -14,8 +14,8 @@ Above all else, a site must be highly performant, widely accessibly, and device 
 
 #### User Centric Objective
   1. Adhere to standards as they are defined by the language specification
-  2. Apply [progressive enhancement](pe.md) by serving core site content and functionality to all user agents and serving an enhanced experience built on top of the basic experience. ~~Apply JavaScript to enhance the site with a richer experience when it is supported and enabled, but do not require it in order to complete any core tasks on the site.~~
-  3. Polyfil only essential features and avoid including additional library code whenever possible. 
+  2. Apply [progressive enhancement](pe.md) by serving core site content and functionality to all user agents and serving an enhanced experience built on top of the basic experience to more capable browsers and devices.
+  3. Polyfil only essential features and avoid including additional library code whenever possible. Performance *IS* user experience. 
 
 ### Developer Centric Goals
 A code base must be maintainable, it must be readable, and it must be designed for modularity.
@@ -28,7 +28,7 @@ A code base must be maintainable, it must be readable, and it must be designed f
   5. Testable
     * Test for coding standard compliance
     * Test for visual regression (unit level)
-    * Test for selector chain redundancy 
+    * Test for redundancies
   6. Documentation 
     * Style Guide
     * Coding Standard
@@ -42,7 +42,7 @@ An object or component should have only a single responsibility, and that respon
 Never directly edit the base styles (the object) of a component, unless you are certain you wish for this change to apply globally to all components that extend it. Use an additional class applied to the same instance of the base component to extend or overwrite the base component.  Extensions should not radically alter the end user’s expectation of an object’s functionality.
 
 #### Open/Closed Principle
-entities (classes, modules, functions, etc.) are open for extension, but closed for modification. Base rules may be extended, but not directly modifiable. This is why directly styling HTML tags is not acceptable - reduce the amount of global element styles in order to reduce the chances of breaking the open/closed principle [[7]](addendum.md) [[9]](addendum.md). Opt-in, never opt-out, in order to avoid redundant overrides and code bloat.
+Entities (classes, modules, functions, etc.) are open for extension, but closed for modification. Base rules may be extended, but not directly modifiable. This is why directly styling HTML tags is not acceptable - reduce the amount of global element styles in order to reduce the chances of breaking the open/closed principle [[7]](addendum.md) [[9]](addendum.md). Opt-in, never opt-out, in order to avoid redundant overrides and code bloat.
 
 #### Composition over Inheritance
 Whenever possible, abstract specific functionality into isolation to be used to compose complete UI components.  Whenever similar code is being written more than once, look to abstract (i.e. vertical-spacing).  Standardizing similar styles cuts down on excess code and needless and/or inadvertent divergent implementation of similar patterns.
@@ -50,10 +50,10 @@ Whenever possible, abstract specific functionality into isolation to be used to 
 Composition takes place in the HTML applying classes directly to the elements you wish to style.
 
 #### Liskov Substitution Principle
-objects should be replaceable with instances or their sub-components without breaking. Sub-components that extend a module should be interchangeable with the base module itself. To keep true to this principlea module's subcomponent(s) should never affect layout [[7]](addendum.md).
+Object extensions should be replaceable with other extensions of the same object without breaking. For example, applying a different component skin or structure to a base object must not affect the object itself.
 
 #### Entity Segregation Principle
-It is sometimes better to have multiple base modules opposed to a single generic module with multiple sub-components. Never make sacrifices in functionality in the name of utility. Taken too far, code abstraction becomes  detrimental [[7]](addendum.md). When writing modular CSS, it's not about maintaining modularity in the actual code, but rather modularity in the actual design [[10]](addendum.md).
+It is sometimes better to have multiple base objects opposed to a single generic object with multiple sub-objects. Never make sacrifices in functionality in the name of utility. Taken too far, code abstraction becomes  detrimental [[7]](addendum.md). When writing modular CSS, it's not about maintaining modularity in the actual code, but rather modularity in the actual design system [[10]](addendum.md).
 
 #### Minimize Coupling
 Build multiple, specific objects, rather than overly generic ones.  This helps to avoid tight coupling between unrelated modules, making it easier to make changes without inadvertently affecting other modules.  Avoid abstractions that attempt to do too much.  Smaller, more specific abstractions are preferred. Never couple styles to particular DOM elements or to a particular DOM structure. Never assume specific node children. (i.e. use a `.nav-item` class on each child rather than a `.nav & li a` selector chain).
