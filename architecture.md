@@ -4,9 +4,9 @@
 
 ## Directory Structure
 
-Archetype is a modular design system for building UI components. Most of Archetype's utilities, objects, and components are managed with [Bower](http://bower.io) within the `bower_components` directory. It is a best practice to [version control Front-End packages](http://addyosmani.com/blog/checking-in-front-end-dependencies/). These modules are `@import`-ed into a project, customized to your needs, and controlled with:
+Archetype is a modular design system for building UI components. Most of Archetype's modules (utilities, objects, and components) are managed with [Bower](http://bower.io) within the `bower_components` directory. It is a best practice to [version control Front-End packages](http://addyosmani.com/blog/checking-in-front-end-dependencies/). These modules are `@import`-ed into a project, customized to your needs, and controlled by [Archetype](https://github.com/Archetype-CSS/Archetype).
 
-| Directory/File       | Description        |
+| Directory/File       | Description    |
 | ------------- | --------------------- |
 | `main.scss`      | Partials should be used for all base, component, and layout styles. These partials are then `@import`-ed into `main.scss` which provides the opportunity to easily enable/disable design system modules as needed. When including partials within your `main.scss` stylesheet, leave off the file extension to allow for easier conversion between Sass and SCSS syntaxes if you ever need to do so [[17]](addendum.md). Example [Archetype's main.scss](https://github.com/Archetype-CSS/Archetype/blob/master/sass/main.scss) |
 | `base/`      | The base directory contains styles and settings that apply to the entire project. These include the `_color-pallet.scss` and `_typography-pallet.scss` partials as well as settings for [compass](http://compass-style.org/) and compass plugins. The `base/` directory is where all site-wide settings are controlled. |
@@ -14,9 +14,6 @@ Archetype is a modular design system for building UI components. Most of Archety
 | `bower_components` | This is where all Archetype modules are downloaded by [Bower](http://bower.io) |
 | `layout/` | Layout styles provide structure to mobile-first, linear content. These styles are used to progressively enhance the basic layout when device capability and/or viewport allow. Because layout is treated as an enhancement, these styles are kept separate from the components they enhance and are applied with their own class. Each component's layout is defined in its own partial inside the layout directory. Layout stylesheets are named by prefixing the component's name with `l-` in order to explicitly define the relationship between layout and component. |
 | `temp/` | The temporary directory contains any styles that haven't yet been properly defined and organized within the project's architecture. This where any hacks or quick fixes belong. Each 'fix' placed within this directory should be given its own partial and should be accompanied by a corresponding issue properly tagged and filed in the project's repository so that it can be incorporated into the code base at a later date. Preventing sub-standard code from being committed into the code base helps to prevent unnecessary depreciation as well as unintentionally introducing bugs by keeping these 'fixes' quarantined within the temp directory. [[25]](addendum.md). |
-
-
----
 
 ## Object Oriented CSS (OOCSS)
 
@@ -43,7 +40,7 @@ A discrete and independent entity designed to exist as a stand alone module with
 
 In order to maintain modularity a component must adhere to the following:
 
-  *Component styles must not declare any explicit size constraints, allowing the module to scale to it's parent container. A component can be placed inside a layout component, i.e. a grid; or extended with a layout class, but it must never be given an explicit width.
+  * Component styles must not declare any explicit size constraints, allowing the module to scale to it's parent container. A component can be placed inside a layout component, i.e. a grid; or extended with a layout class, but it must never be given an explicit width.
   * A component must remain independent from siblings, children, and parents allowing for arbitrarily placement within a design system. This means that CSS ID Selectors must be avoided to allow components to remain non-unique (able to appear on the same page more than once).
   * A component's name must be unique to the project to ensure that only instances of the same component can have the same name. Re-using a component also means re-using its behavior. To use the same component with differing behavior requires a new component.
   * Selectors must remain context free and un-coupled to HTML by avoiding the use of elements within CSS selectors. HTML element styles are scoped by placing a class on either the element itself or on a parent container. This means all HTML element styles are opt-in (opposed to opt-out) making the only "default" HTML element styles are those applied by normalize, thus avoiding redundant overrides. [[27]](addendum.md) [[28](addendum.md)
@@ -103,6 +100,36 @@ Styles that define how a component sits on the page. A component's layout class 
 
 ---
 
+## Class Semantics
+
+>"We shouldn't be afraid of making the connections between layers clear and explicit rather than having class names rigidly reflect specific content. Doing this doesn't make classes "unsemantic," it just means that their semantics are not derived from the content." - [Nicolas Gallager](https://twitter.com/necolas)
+
+Class names should remain content-independent[[3]](addendum.md). By avoiding tightly coupled class names and content semantics, code is more easily reused and modularized to allow for increased scalability of your architecture. Because the most reusable code components are those with content-independent class names, class names should be derived from repeating structural or functional patterns and never from the content.
+
+  1. Increasing semantic value of a section of html and content [[1]](addendum)
+    * Content-layer semantics are served by html elements and attributes [[3]](addendum)
+  2. Class names communicate useful information to developers and serve hooks for CSS or JavaScript [[3]](addendum.md).
+    * Decrease the expectation of a specific HTML structure [[1]](addendum).
+
+The important distinction is that the HTML class attributes are semantic in the way they convey meaning to the developer, rather than the content. Content receives it's semantic value from its markup (HTML tags and ARIA attributes). Code receives its semantic value from its classes.
+
+### Specificity
+
+>"The problem with such a depth is that it enforces a much greater dependency on a particular HTML structure. Components on the page can’t be easily moved around" - [Jonathan Snook](https://twitter.com/snookca)
+
+Minimize "depth of applicability" in order to avoid over-reliance on a predefined HTML structure and hindering modularity and flexibility of components. This also helps to prevent introducing potential specificity issues which are notoriously difficult to debug. When selectors are kept succinct, it also becomes easier to convert components into templates for dynamic content [[1]](addendum.md).
+
+### Guidelines for Minimal Specificity
+
+  * Do not use CSS ID selectors.
+  * Do not use location based selectors to change a component's appearance based on its page position or region - i.e. (main-content, side-bar, footer, etc)[[17]](addendum.md). When a component has different appearances create a new component by changing out its structure or skin class.
+  * Always name-space state class names e.g. `.is-disabled.is-collapsed` with a prefix.
+  * Avoid the use of element selectors in order to keep them free from context and un-coupled to the HTML. Scope HTML element selectors with a class on the root element or a parent element so that these styles are opt-in rather than opt-out. This will avoid redundant overrides of un-needed styles and keep specificity minimal. [[1]](addendum.md) [[27]](addendum.md) [[28]](addendum.md)
+  * `!important` should be avoided as much as possible. State and utility styles  are an examples of an acceptable use of `!important` [[1]](addendum.md).
+  * Never qualify a selector with an element selector e.g. `ul.nav`, as this decreases selector performance, creates a context dependency, and increases the selector's specificity. These are all things to be avoided [[1]](addendum.md) [[12]](addendum.md).
+
+---
+
 ## Selector Construct and Naming Conventions
 
 Selector construct must explicitly communicate the context and function of the entity being named. Also, selector construct must be consistently applied to allow for efficient use of grep and more meaningful diffs. The BEM Methodology [[2]](addendum.md) and interpretations of BEM [[3]](addendum.md) [[13]](addendum.md) [[26]](addendum.md) make use of an efficient system to accomplish these goals by explicitly communicating the function and context of the entity being named, as well as its relationship to both child and parent components while avoiding deeply nested selectors that tie content to container and make assumptions about markup. In this way, a BEM-like system helps to reinforce our primary objective of modularity.
@@ -132,11 +159,6 @@ Exampe Use Case:
 
 
 ```
-
-**CONSIDER NAMESPACING SECTION HERE!!!!!
-(QA/JS/U/ETC…)??**
-
-
 
 ### Component
 
@@ -216,8 +238,24 @@ Example:
 Example:
 ```scss
 
+.o-objectName {...}                   /* object */
+
+.o-objectName__subObjectName {...}    /* sub object class */
+
+.o-objectName-decendentName {...}    /* */
 
 ```
+
+Example use case:
+```scss
+.o-nav {...}
+
+.o-nav__vertical {...}
+```
+
+
+
+
 
 ### Object Extension
 
@@ -229,32 +267,28 @@ Example:
 
 
 
-### Class Semantics
 
-Class names should remain content-independent[[3]](addendum.md). By avoiding tightly coupled class names and content semantics, code is more easily reused and modularized to allow for increased scalability of your architecture. Because the most reusable code components are those with content-independent class names, class names should be derived from repeating structural or functional patterns and never from the content.
 
->"We shouldn't be afraid of making the connections between layers clear and explicit rather than having class names rigidly reflect specific content. Doing this doesn't make classes "unsemantic," it just means that their semantics are not derived from the content." - [Nicolas Gallager](https://twitter.com/necolas)
+Example: (don't do this)
+```scss
+// avoid decendent selectors like this
+// that tightly couple style to a specific markup pattern
+// because it breaks modularity
+.object {
+& > li {...}
+}
+```
 
-  1. Increasing semantic value of a section of html and content [[1]](addendum)
-    * Content-layer semantics are served by html elements and attributes [[3]](addendum)
-  2. Class names communicate useful information to developers and serve hooks for CSS or JavaScript [[3]](addendum.md).
-    * Decrease the expectation of a specific HTML structure [[1]](addendum).
+```scss
+.primaryNav-navItem {...}         /* component name */
 
-The important distinction is that the HTML class attributes are semantic in the way they convey meaning to the developer, rather than the content. Content receives it's semantic value from its markup (HTML tags and ARIA attributes). Code receives its semantic value from its classes.
+.primaryNav--structure {...}
+.primaryNav--skin {...}
 
-### Specificity
+.primaryNav-navItem--skin {...}
+.primaryNav-navItem--structure {...}
 
->"The problem with such a depth is that it enforces a much greater dependency on a particular HTML structure. Components on the page can’t be easily moved around" - [Jonathan Snook](https://twitter.com/snookca)
+.primaryNav-navItem.is-active {...}
 
-Minimize "depth of applicability" in order to avoid over-reliance on a predefined HTML structure and hindering modularity and flexibility of components. This also helps to prevent introducing potential specificity issues which are notoriously difficult to debug. When selectors are kept succinct, it also becomes easier to convert components into templates for dynamic content [[1]](addendum.md).
-
-### Guidelines for Minimal Specificity
-
-  * Do not use CSS ID selectors.
-  * Do not use location based selectors to change a component's appearance based on its page position or region - i.e. (main-content, side-bar, footer, etc)[[17]](addendum.md). When a component has different appearances create a new component by changing out its structure or skin class.
-  * Always name-space state class names e.g. `.is-disabled.is-collapsed` with a prefix.
-  * Avoid the use of element selectors in order to keep them free from context and un-coupled to the HTML. Scope HTML element selectors with a class on the root element or a parent element so that these styles are opt-in rather than opt-out. This will avoid redundant overrides of un-needed styles and keep specificity minimal. [[1]](addendum.md) [[27]](addendum.md) [[28]](addendum.md)
-  * `!important` should be avoided as much as possible. State and utility styles  are an examples of an acceptable use of `!important` [[1]](addendum.md).
-  * Never qualify a selector with an element selector e.g. `ul.nav`, as this decreases selector performance, creates a context dependency, and increases the selector's specificity. These are all things to be avoided [[1]](addendum.md) [[12]](addendum.md).
-
+```
 
