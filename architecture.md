@@ -291,29 +291,3 @@ Example:
 }
 ```
 
-
-
-
-Example: (don't do this)
-```scss
-// avoid decendent selectors like this
-// that tightly couple style to a specific markup pattern
-// because it breaks modularity
-.object {
-& > li {...}
-}
-```
-
-```scss
-.primaryNav-navItem {...}         /* component name */
-
-.primaryNav--structure {...}
-.primaryNav--skin {...}
-
-.primaryNav-navItem--skin {...}
-.primaryNav-navItem--structure {...}
-
-.primaryNav-navItem.is-active {...}
-
-```
-
