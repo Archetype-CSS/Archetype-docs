@@ -4,7 +4,7 @@
 
 ## Directory Structure
 
-Archetype is a modular design system for building UI components. Most of Archetype's modules (utilities, objects, and components) are managed with [Bower](http://bower.io) within the `bower_components` directory. It is a best practice to [version control Front-End packages](http://addyosmani.com/blog/checking-in-front-end-dependencies/). These modules are `@import`-ed into a project, customized to your needs, and controlled by [Archetype](https://github.com/Archetype-CSS/Archetype).
+Most of Archetype's modules (utilities, objects, and components) are managed with [Bower](http://bower.io) within the `bower_components/` directory. It is a best practice to [version control Front-End packages](http://addyosmani.com/blog/checking-in-front-end-dependencies/). These modules are `@import`-ed into a project, customized to your needs, and controlled by [Archetype](https://github.com/Archetype-CSS/Archetype).
 
 | Directory/File       | Description    |
 | ------------- | --------------------- |
@@ -144,59 +144,66 @@ This naming pattern is inspired by the BEM Methodology [[2]](addendum.md) as wel
 
 Example:
 ```scss
-
-
+// component name
+.object {...}                        /* represents the higher-level abstraction of a component */
+.object__subObject {...}             /* a minor modification or extension of an object */
+.object__modifier {...}              /* represents a modification of an object */
+.component--extension {              /* extends an component with a skin or structure */
+  &.is-active {...}                  /* represents a change in the component's state */
+}          
+.prefix-component-name {}            /* targets all component entities i.e. for layout */
 ```
 
 Exampe HTML:
 ```html
-
-
-```
-
-Exampe Use Case:
-```html
-
-
+<ul class="object object__modifier object--extension is-object-state">
+  <li class="object__element is-active">...</li>
+</ul>  
 ```
 
 ### Component
 
 ```scss
+.primaryNav {...}
+.primaryNav__item {...}
 
-
-```
-
-
-
-
-```scss
-***correction:  the above markup generates the following CSS:***
-
-.object li {...}   //this is an over-qualified selector
-
-
-***wither write this as: .object__li (ex: .nav__item) or explore using Sass3.3 @root syntax***
 ```
 
 Example HTML:
 ```html
-
+<ul class="o-nav o-nav__vertical primaryNav">     /* component */
+  <li class="primaryNav__item">Nav Item</li>      /* sub component */
+</ul>
 
 ```
-
 
 ### State
 
 Example:
 ```html
-
+ <button type="submit" class="btn btn--large btn--primary is-disabled">Submit</button>
+```
+Example:
+```html
+<ul class="nav nav__vertical primaryNav--large primaryNav--primary">
+  <li class="primaryNav__item is-active">...</li>
+</ul>
 ```
 
 ### Layout
 
 Example:
+```scss
+.l-primaryNav {
+  // primaryNav layout styles here
+}
+```
+
+Example HTML:
 ```html
+<ul class="nav nav__vertical primaryNav--large primaryNav--primary l-primaryNav">
+  <li class="primaryNav__item is-active">...</li>
+</ul>
 
 ```
 
@@ -204,7 +211,7 @@ Example:
 
 Example:
 ```html
-
+<span class="i-account">My Account</span>
 ```
 
 
@@ -212,6 +219,9 @@ Example:
 
 Example:
 ```js
+<ul class="nav nav__vertical primaryNav--large primaryNav--primary l-primaryNav" data-nav="primaryNav">
+  <li class="primaryNav__item is-active">...</li>
+</ul>
 
 ```
 
@@ -220,51 +230,66 @@ Example:
 
 Example:
 ```html
-
-<button id=”qa-1234” class=”btn btn--large btn--cta”>click here stupid</button>
+<button id="qa-1234" class="btn btn--large btn--success">Click Here Stupid</button>
 ```
-
 
 ### Objects
 
 Example:
 ```scss
+.o-objectName {...}
+```
 
+Practical Example:
+```scss
+.o-nav {...}
+```
 
+Example HTML:
+```html
+<ul class="o-nav">
+...
+</ul>
 ```
 
 ### Sub Objects
 
 Example:
 ```scss
-
-.o-objectName {...}                   /* object */
-
-.o-objectName__subObjectName {...}    /* sub object class */
-
-.o-objectName-decendentName {...}    /* */
-
+.o-objectName__subObjectName {...}
 ```
 
-Example use case:
-```scss
-.o-nav {...}
+Example HTML:
+```html
+<ul class="o-objectName o-objectName__subObjectName">
+  ...
+</ul>
+```
 
+Practical Example:
+```scss
 .o-nav__vertical {...}
 ```
 
+Example HTML:
+```html
+<ul class="o-nav o-nav__vertical">
+...
+</ul>
+```
 
-
-
-
-### Object Extension
+### Component Extension
 
 Example:
 ```scss
+.primaryNav--structure {
+  // structure styles extending the primaryNav component
+}
 
-
+.primaryNav--skin {
+  // skin styles extending the primaryNav component
+}
 ```
-
 
 
 
