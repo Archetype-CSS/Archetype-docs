@@ -24,16 +24,14 @@ A code base must be maintainable, it must be readable, and it must be designed f
   1. Minimize coupling between components by following Object Oriented methodologies
   2. Design systems not pages by building a collection of components and layouts, which can be assembled together to create a specific experience.  Avoid page-specific styling in favor of component modifiers and class extensions.
   3. Easily maintain the project's design system by following style guide driven development [[20]](addendum.md) that is made with HTML and CSS, uses production code, and uses git for version control [[21]](addendum.md). A project's style guide should also be automatically updated to reflect changes in the code base and facilitate testing throughout the project development cycle.
-  4. Maintain minimal specificity whenever possible. Avoid polluting the "global name space" by never applying styling directly to an element tag.
+  4. Maintain minimal specificity whenever possible.
   5. Testable
     * Test for coding standard compliance
     * Test for visual regression (unit level)
     * Test for redundancies
   6. Documentation 
-    * Style Guide (Coding Standard)
-    * Pattern Library (catologe of components)
-
----
+    * Style Guide
+    * Coding Standard
 
 ### Object Oriented Principles
 

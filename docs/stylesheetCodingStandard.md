@@ -108,6 +108,11 @@ Consider using [Modular Scales](http://alistapart.com/article/more-meaningful-ty
 >"By using culturally relevant historically pleasing ratios to create modular scales and basing the measurements in our compositions on values from those scales we can achieve a visual harmony not found in layouts that use arbitrary convention or easily divisible numbers." - [Tim Brown](https://twitter.com/nicewebtype)
 
 
+#### Vendor Prefixes
+
+Don’t specify vendor prefixes in the authoring style sheets. The level of browser support you require will change over time (resulting in redundant code in your authoring style sheets). The prefixing of CSS properties can be handled in a couple of lines with an automated tool and will be more accurate than you.[[30]](addendum.md)
+
+
 ## Sass Guidelines
 
 The guidelines here should be taken in context with the CSS Guidelines as each of these are inter-related. This document will focus primarily on the usage of Sass to implement OOCSS/SMACSS principles. Without those underlying fundamentals, Sass will only complicate and compound the issues involved in a poorly constructed CSS architecture. Additionally, improper Sass implementation can easily lead to bloated output and lengthy selectors which not only inflates file size, but also causes JavaScript to work less efficiently causing performance issues for end users. The following guidelines are intended to help ensure user centered goals and performance always take precedence over developer convenience when building with Sass.
@@ -127,6 +132,10 @@ Use // comment syntax to omit comments from output.
   * Use the standard /* */ CSS comments in your SCSS to keep comments in the CSS output unless output is set to compressed in which case all comments will be stripped out.
   * Use the /*! */ comment syntaxto ensure comments will remain regardless of output setting.
 
+#### Don’t put markup patterns in comments
+
+Comments are good. Indeed, writing lots of meaningful comments is encouraged. However, refrain from entering examples of intended markup in the comments of style sheets. They immediately create a scenario where information is likely to become obsolete and confusing. Instead, the template stub that sits alongside the style sheet should provide all the markup. As this template is necessary for the application to function, it is by nature always up to date and provides a more meaningful reference. [[30]](addendum.md).
+
 
 ~~### Nesting Selectors
   * Limit nesting to two or three levels deep. Reassess any nesting more than two levels deep. This prevents overly-specific CSS selectors.
@@ -139,8 +148,7 @@ Use // comment syntax to omit comments from output.
 Example:~~
 
 ```scss
-
-
+// sass example...
 ```
 
 ### Variables
@@ -151,13 +159,11 @@ Example:~~
 
 Example:
 ```scss
-
 $brand-gray:            #999999;
 $brand-gray-light:      #E5E5E5;
 
 $nav-color-primary:     $brand-gray;
 $nav-color-secondary:   $brand-gray-light;
-
 ```
 
   * When defining variables, they should appear first at the top of their component's partial file and be grouped by skin and structure.
@@ -216,6 +222,8 @@ Example:
   * Avoid using @extend within a mixin - this can easily lead to nested @extend's
   * Never use @extend for the simplification of (OOCSS) multi-class constructs to build single-class objects. This is dangerous because it can easily produce very bloated output and complicated selector strings. This technique should be avoided until a native browser implementation of @extend is available[[29]](addendum.md).
 
+Don’t extend anything other than a placeholder selector (e.g. %Placeholder) and don’t place any nested styles within the place holder. It seldom creates the CSS you imagine. [[30]](addendum.md)
+
 Example misuse of @extend:
 ```scss
 
@@ -243,7 +251,6 @@ Consistent ordering of @-rules and properties leads to increased readability and
 
 Example:
 ```scss
-
 .selector {
   @extend %utility-class;
   @include mixin-name(mixin-arguments);
@@ -257,7 +264,6 @@ Example:
     property: value;
   }
 }
-
 ```
 
 ### Sass Packages and Modules
@@ -267,4 +273,16 @@ Example:
   * A Sass module should be broken up by functionality so that components of the package can be imported separately, i.e. `@import "compass/css3";`
   * Avoid global variables when possible and use name-spaces when they are necessary.
   * Use placeholders selectors whenever possible.
+  
+### Keep Sass Code as simple as possible
+
+a mixin for creating buttons that requires three or more arguments to be passed just to set border styles, background colour and text size is probably a needless over complication. [[30]](addendum.md) [[31]](addendum.md).
+
+## Always monitor CSS output
+
+>"Preprocessors do not output bad code. Bad developers do." - [Hugo Giraudel](http://hugogiraudel.com/)
+
+Our beautifully crafted Sass code is never read by the browser. Always keep an eye on it's output, run through it manually, and process with [CSSlint](https://github.com/CSSLint/csslint) to catch any troublesome output / selectors / etc.. There are almost always unintended chunks of code. Failure to check the final product you are producing is a sure fire way to create sub-standard CSS files. [[30]](addendum.md).
+
+
 
