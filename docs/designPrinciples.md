@@ -67,3 +67,43 @@ Reduce repetition when ever possible. Every piece of knowledge must have a singl
 #### Documentation
 Heavily document components describing how it should be used, why specific CSS properties are needed, and the recommended markup pattern.  Any browser specific hacks should documented particularly well.
 
+---
+---
+---
+
+[[32]](addendum.md)
+
+# Style Guide Driven Development
+
+Styleguide Driven Development (SDD) is a practice that encourages the separation of UX, Design & Frontend from Backend concerns. This is achieved by developing the UI separately in a styleguide [[32]](addendum.md).
+
+By separating the UI and backend tasks so they don’t rely on each other, it allows teams to iterate fast on prototypes and designs without having to make changes to the backend. With careful planning they should plug-and-play together nicely [[32]](addendum.md).
+
+## Scenario Visualisation
+
+User interfaces are often developed for best case scenarios, however they can unknowingly break in a handful of cases when a possible scenario hasn’t been considered or is ‘out of sight, out of mind’. Simple things like the length of the data or how it responds to mobile breakpoints can turn an otherwise well designed UI into an amateurish mess.
+
+Having a styleguide that documents all the possible scenarios for a view is a tremendously powerful asset. It directly benefits each team member’s role as well as other members of the business. Historically, testing a view across all of its various states was very manual process and occasionally required database manipulation.
+
+By documenting all scenarios in a central location the styleguide essentially becomes a frontend spec and helps identify edge-cases, gaps in the UX and breakages.
+
+---
+[[33]](addendum.md)
+
+Anyone who has attempted to maintain a UI Style Guide over a long period of time will attest that it is a very difficult process. They are generally prioritised below the maintenance of your applications themselves and as such are likely the first candidates to fall behind and the last to be brought out of tech debt [[33]](addendum.md).
+
+This is bad because once your Style Guide falls out of sync with your application(s) it has entirely lost its purpose. It is no longer a trustworthy representation of the state of your UI and will quickly fall out of favour with the design and development team [[3]](addendum.md).
+
+A living style guide system autogenerate Style Guides when changes are made to the codebase so in theory they shouldn’t be able to fall behind. There are a whole host to choose from and many can be set up with fairly minimal effort.
+
+**component api*** 
+They autogenerate Style Guides when changes are made to the codebase so in theory they shouldn’t be able to fall behind. There are a whole host to choose from and many can be set up with fairly minimal effort.
+
+The goals and benefits of a Style Guide were exactly what we wanted but, not knowing how to achieve them, we started by extracting as much of our UI into components and moving them outside of the applications. This also gave us the opportunity to normalise and condense our UI. Once done, we created a very simple API in which to fetch them from the Component Layer. Having the api for us was crucial because we wanted to maintain the mapping between the latest version of the the component and the application, and not have developers copy and paste component code.
+
+Having a single version of the component, accessible via an API, worked perfectly with unit testing too so we could ensure that the contract between the API parameters and the returned template was solid. We could modify and extend the component based on the data we passed it and assert on the returned result. This also allowed us to add accessibility helpers and microformat attributes as standard and ensure that they weren’t forgotten when used in new applications.
+
+It’s always up to date with the rest of lonelyplanet.com because it uses the exact same templates and CSS. As we’re not just performing static analysis of the CSS we are also able to showcase components that require JS too. It becomes a risk free environment where developers can build and tweak components and then allow them to propagate out to the rest of the applications.
+
+
+
