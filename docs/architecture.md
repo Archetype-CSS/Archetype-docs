@@ -6,15 +6,62 @@
 
 Most of Archetype's modules (utilities, objects, and components) are managed with [Bower](http://bower.io) within the `bower_components/` directory. It is a best practice to [version control Front-End packages](http://addyosmani.com/blog/checking-in-front-end-dependencies/). These modules are `@import`-ed into a project, customized to your needs, and controlled by [Archetype](https://github.com/Archetype-CSS/Archetype).
 
-| Directory/File       | Description    |
-| ------------- | --------------------- |
-| `main.scss`      | Partials should be used for all styles. These partials are then `@import`-ed into `main.scss` which provides the opportunity to easily enable/disable design system modules as needed. When including partials within your `main.scss` stylesheet. Leave off the file extension to allow for easier conversion between Sass and SCSS syntaxes if you ever need to do so [[17]](addendum.md). This file also contains styles and settings that apply to the entire project, as well as [compass](http://compass-style.org/) configuration and compass plugins. Example [Archetype's main.scss](https://github.com/Archetype-CSS/Archetype/blob/master/sass/main.scss) |
-| `components/` | Components are modular and reusable entities of a design system. Everything within the design system is a component. Each component is maintained within its own repository, managed with [Bower](http://bower.io), and `@import`-ed into `main.scss`. All objects are prefixed with `o-`. They are installed using `bower install Archetype-o-[object-name]`. Archetype components have basic, default structure and skin styles applied for rapid prototyping. These default styles can be easily over-ridden. Archetype components are the equivalent to Modules within the [SMACSS](http://smacss.com/) methodology. Sub objects are defined in the same partial as the object they extend/modify. |
-| `bower_components` | This is where all Archetype modules are downloaded by [Bower](http://bower.io) |
-| `layout/` | Layout styles provide structure to mobile-first, linear content. These styles are used to progressively enhance the basic layout when device capability and/or viewport allow. Because layout is treated as an enhancement, these styles are kept separate from the components they enhance and are applied with their own class. Each component's layout is defined in its own partial inside the layout directory. Layout stylesheets are named by prefixing the component's name with `l-` in order to explicitly define the relationship between layout and component. |
-| `temp/` | The temporary directory contains any styles that haven't yet been properly defined and organized within the project's architecture. This where any hacks or quick fixes belong. Each 'fix' placed within this directory should be given its own partial and should be accompanied by a corresponding issue properly tagged and filed in the project's repository so that it can be incorporated into the code base at a later date. Preventing sub-standard code from being committed into the code base helps to prevent unnecessary depreciation as well as unintentionally introducing bugs by keeping these 'fixes' quarantined within the temp directory. [[25]](addendum.md). |
+<pre>
+Archetype/ 
+|- node_modules/
+|- bower_components/
+|
+|– sass/ 
+|   |– _main.scss
+|   |- components/
+|   |- layout/
+|   |- style-guide/
+|   |- temp/
+|
+|- style-guide/   
+|- performance/
+|
+|- .csslintrc
+|- .scss-lint.yml
+|- .travis.yml
+|- bower.json
+|- config.rb
+|- Gruntfile.js
+|- package.json
+|- phantomas-config.json
+|- README.md
+</pre>
 
-## Object Oriented CSS (OOCSS)
+### `/sass/main.scss`
+
+Partials should be used for all styles. These partials are then `@import`-ed into `main.scss` which provides the opportunity to easily enable/disable design system modules as needed. When including partials within your `main.scss` stylesheet, leave off the file extension to allow for easier conversion between Sass and SCSS syntaxes if you ever need to do so [[17]](addendum.md). This file also contains styles and settings that apply to the entire project, as well as [compass](http://compass-style.org/) configuration and compass plugins. 
+
+Example: [Archetype's main.scss](https://github.com/Archetype-CSS/Archetype/blob/master/sass/main.scss)
+
+### `/sass/components/`
+
+Components are modular and reusable entities of a design system. Everything within the design system is a component. Each component is maintained within its own repository, managed with [Bower](http://bower.io), and `@import`-ed into `main.scss`. All objects are prefixed with `o-`. They are installed using `bower install Archetype-c-[object-name]`. Archetype components have basic, default structure and skin styles applied for rapid prototyping. These default styles can be easily over-ridden. Archetype components are the equivalent to Modules within the [SMACSS](http://smacss.com/) methodology. Sub objects are defined in the same partial as the object they extend/modify.
+
+Example: [Archetype's Components](https://github.com/Archetype-CSS?query=Archetype-c-)
+
+### `/sass/bower_components`
+
+This is where all Archetype modules are downloaded by [Bower](http://bower.io). It is a best practice to [version control Front-End packages](http://addyosmani.com/blog/checking-in-front-end-dependencies/). 
+
+### `/sass/layout/`
+
+Layout styles provide structure to mobile-first, linear content. These styles are used to progressively enhance the basic layout when device capability and/or viewport allow. Because layout is treated as an enhancement, these styles are kept separate from the components they enhance and are applied with their own class. Each component's layout is defined in its own partial inside the layout directory. Layout stylesheets are named by prefixing the component's name with `l-` in order to explicitly define the relationship between layout and component.
+
+### `/sass/temp/`
+
+The temporary directory contains any styles that haven't yet been properly defined and organized within the project's architecture. This where any hacks or quick fixes belong. Each 'fix' placed within this directory should be given its own partial and should be accompanied by a corresponding issue properly tagged and filed in the project's repository so that it can be incorporated into the code base at a later date. Preventing sub-standard code from being committed into the code base helps to prevent unnecessary depreciation as well as unintentionally introducing bugs by keeping these 'fixes' quarantined within the temp directory. [[25]](addendum.md).
+
+
+
+
+---
+
+# Object Oriented CSS (OOCSS)
 
 >"[A] CSS “object” is a repeating visual pattern which can be abstracted into an independent snippet of HTML CSS and possibly JavaScript. Once created an object can then be reused throughout a site." - [Nichole Sullivan](https://twitter.com/stubbornella)
 
@@ -22,18 +69,21 @@ Most of Archetype's modules (utilities, objects, and components) are managed wit
 
   1. **Separation of Structure from Skin** - distinguish between structure styles (box-model) and skin styles (color, font, gradients) and abstract these styles in class-based modules to allow re-use [[6]](addendum.md).
   2. **Separation of Container and Content** - avoid all explicit parent-child relationship within style declarations so that a component's style is not dependant upon its container which allows the module to be reused [[6]](addendum.md).
+  
+These are the basic concepts Archetype modules are built on. Also see: [Archetype Design Principles](/designPrinciples.md). 
+
 
 ### Utilities
-Archetype utilities are low-level abstractions used globally throughout a design system via a class, function, or mixin to provide specific functionality. Utilities are maintained within their own repository, managed with [Bower](http://bower.io), and are `@import`-ed within `main.scss`. All utilities are prefixed with `Archetype-u-`. They are installed using `bower install Archetype-u-[utility-Name]`. Utilities are applied within the stylesheets, rather than the markup.
+Archetype utilities are low-level abstractions used globally throughout a design system via a class, function, or mixin to provide specific functionality. Utilities are maintained within their own repository, managed with [Bower](http://bower.io), and are `@import`-ed within `main.scss`. All utilities are prefixed with `Archetype-u-`. They are installed using `bower install Archetype-u-[utility-Name]`. Utilities are applied within the stylesheets, rather than the markup. They reside within `bower_components` once installed.
 
 ### Objects
-Object styles are generic abstractions that can be extended to build a component. They are styles which remain consistent and unchanged within a component regardless of skin or structure and are abstracted to be used as a foundation for building UI components. The classic OOCSS example is the media-object [[16]](addendum). Each object is maintained within its own repository, managed with [Bower](http://bower.io), and `@import`-ed into `main.scss`. All objects are prefixed with `Archetype-o-`. They are installed using `bower install Archetype-o-[object-name]`.
+Object styles are generic abstractions that can be extended to build a component. They are styles which remain consistent and unchanged within a component regardless of skin or structure and are abstracted to be used as a foundation for building UI components. The classic OOCSS example is the media-object [[16]](addendum). Each object is maintained within its own repository, managed with [Bower](http://bower.io), and `@import`-ed into `main.scss`. All objects are prefixed with `Archetype-o-`. They are installed using `bower install Archetype-o-[object-name]`. They reside within `bower_components` once installed.
 
 #### Object Modifiers
-An object modifier in Archetype is a context-dependant sibling of an object that performs a certain function and is represented by an additional HTML class attribute on the element. Object modifiers are denoted by the use of `__` (double underscores) for example, `.objectName__modifierName` in order to maintain context, maintain control of the cascade, and avoid location-dependant selectors [[2]](addendum.md). Object modifiers extend or provide minor overrides to the object and is often applied to the same HTML element or a direct decendent. 
+An object modifier in Archetype is a context-dependant sibling of an object that performs a certain function and is represented by an additional HTML class attribute on the element. Object modifiers are denoted by the use of `__` (double underscores) for example, `.objectName__modifierName` in order to maintain context, maintain control of the cascade, and avoid location-dependant selectors [[2]](addendum.md). Object modifiers extend or provide minor overrides to the object and is often applied to the same HTML element or a direct decendent. An object modifier is defined in the same partial as the object it modifies. 
 
 ### Components
-A discrete and independent entity designed to exist as a stand alone module without any dependencies to its container. A component can be simple or compound (contain one or more components) and it should be able to be relocated on the page without breaking [[1]](addendum). Example components include buttons, navigation bars, etc. An example of a compound component would be a search block composed of an input and a submit button [[2]](addendum.md), but these are still considered components.
+A discrete and independent entity designed to exist as a stand alone module without any dependencies to its container. A component can be simple or compound (contain one or more components) and it should be able to be relocated on the page without breaking [[1]](addendum). Example components include buttons, navigation, etc. An example of a compound component would be a search block composed of an input and a submit button [[2]](addendum.md), but these are still considered components. Components are unique in the way that they are installed via [Bower](http://bower.io), but can still be modified to accept custom styles. This is done by redefining the components settings file (which contains a [Sass Map](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps) of all the CSS property value pairs passed to the component). The partial containing a component's redefined settings should be properly namespaced and located in the `components` directory. 
 
 In order to maintain modularity a component must adhere to the following:
 
@@ -103,21 +153,6 @@ Class names should remain content-independent[[3]](addendum.md). By avoiding tig
     * Decrease the expectation of a specific HTML structure [[1]](addendum).
 
 The important distinction is that the HTML class attributes are semantic in the way they convey meaning to the developer, rather than the content. Content receives it's semantic value from its markup (HTML tags and ARIA attributes). Code receives its semantic value from its classes.
-
-### Specificity
-
->"The problem with such a depth is that it enforces a much greater dependency on a particular HTML structure. Components on the page can’t be easily moved around" - [Jonathan Snook](https://twitter.com/snookca)
-
-Minimize "depth of applicability" in order to avoid over-reliance on a predefined HTML structure and hindering modularity and flexibility of components. This also helps to prevent introducing potential specificity issues which are notoriously difficult to debug. When selectors are kept succinct, it also becomes easier to convert components into templates for dynamic content [[1]](addendum.md).
-
-### Guidelines for Minimal Specificity
-
-  * Do not use CSS ID selectors.
-  * Do not use location based selectors to change a component's appearance based on its page position or region - i.e. (main-content, side-bar, footer, etc)[[17]](addendum.md). When a component has different appearances create a new component by changing out its structure or skin class.
-  * Always name-space state class names e.g. `.is-disabled` or `.is-collapsed` with a prefix.
-  * Avoid the use of element selectors in order to keep them free from context and un-coupled to the HTML. Scope HTML element selectors with a class on the root element or a parent element so that these styles are opt-in rather than opt-out. This will avoid redundant overrides of un-needed styles and keep specificity minimal. [[1]](addendum.md) [[27]](addendum.md) [[28]](addendum.md)
-  * `!important` should be avoided as much as possible. State and utility styles are an examples of an acceptable use of `!important` [[1]](addendum.md). The reason for this is that they are applied to the element and must override any default component styles.
-  * Never qualify a selector with an element selector e.g. `ul.nav`, as this decreases selector performance, creates a context dependency, and increases the selector's specificity. These are all things to be avoided [[1]](addendum.md) [[12]](addendum.md). Applying styles directly to the element, or qualifying a slector with an element name should be considered as harmful as polluting the global name space in JavaScript. Don't do it.
 
 
 ## Selector Construct and Naming Conventions

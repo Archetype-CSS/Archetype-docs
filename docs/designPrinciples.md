@@ -92,11 +92,11 @@ By documenting all scenarios in a central location the styleguide essentially be
 
 Anyone who has attempted to maintain a UI Style Guide over a long period of time will attest that it is a very difficult process. They are generally prioritised below the maintenance of your applications themselves and as such are likely the first candidates to fall behind and the last to be brought out of tech debt [[33]](addendum.md).
 
-This is bad because once your Style Guide falls out of sync with your application(s) it has entirely lost its purpose. It is no longer a trustworthy representation of the state of your UI and will quickly fall out of favour with the design and development team [[3]](addendum.md).
+This is bad because once your Style Guide falls out of sync with your application(s) it has entirely lost its purpose. It is no longer a trustworthy representation of the state of your UI and will quickly fall out of favour with the design and development team [[33]](addendum.md).
 
 A living style guide system autogenerate Style Guides when changes are made to the codebase so in theory they shouldn’t be able to fall behind. There are a whole host to choose from and many can be set up with fairly minimal effort.
 
-**component api*** 
+**component api**
 They autogenerate Style Guides when changes are made to the codebase so in theory they shouldn’t be able to fall behind. There are a whole host to choose from and many can be set up with fairly minimal effort.
 
 The goals and benefits of a Style Guide were exactly what we wanted but, not knowing how to achieve them, we started by extracting as much of our UI into components and moving them outside of the applications. This also gave us the opportunity to normalise and condense our UI. Once done, we created a very simple API in which to fetch them from the Component Layer. Having the api for us was crucial because we wanted to maintain the mapping between the latest version of the the component and the application, and not have developers copy and paste component code.
@@ -106,4 +106,17 @@ Having a single version of the component, accessible via an API, worked perfectl
 It’s always up to date with the rest of lonelyplanet.com because it uses the exact same templates and CSS. As we’re not just performing static analysis of the CSS we are also able to showcase components that require JS too. It becomes a risk free environment where developers can build and tweak components and then allow them to propagate out to the rest of the applications.
 
 
+### Specificity
 
+>"The problem with such a depth is that it enforces a much greater dependency on a particular HTML structure. Components on the page can’t be easily moved around" - [Jonathan Snook](https://twitter.com/snookca)
+
+Minimize "depth of applicability" in order to avoid over-reliance on a predefined HTML structure and hindering modularity and flexibility of components. This also helps to prevent introducing potential specificity issues which are notoriously difficult to debug. When selectors are kept succinct, it also becomes easier to convert components into templates for dynamic content [[1]](addendum.md).
+
+### Guidelines for Minimal Specificity
+
+  * Do not use CSS ID selectors.
+  * Do not use location based selectors to change a component's appearance based on its page position or region - i.e. (main-content, side-bar, footer, etc)[[17]](addendum.md). When a component has different appearances create a new component by changing out its structure or skin class.
+  * Always name-space state class names e.g. `.is-disabled` or `.is-collapsed` with a prefix.
+  * Avoid the use of element selectors in order to keep them free from context and un-coupled to the HTML. Scope HTML element selectors with a class on the root element or a parent element so that these styles are opt-in rather than opt-out. This will avoid redundant overrides of un-needed styles and keep specificity minimal. [[1]](addendum.md) [[27]](addendum.md) [[28]](addendum.md)
+  * `!important` should be avoided as much as possible. State and utility styles are an examples of an acceptable use of `!important` [[1]](addendum.md). The reason for this is that they are applied to the element and must override any default component styles.
+  * Never qualify a selector with an element selector e.g. `ul.nav`, as this decreases selector performance, creates a context dependency, and increases the selector's specificity. These are all things to be avoided [[1]](addendum.md) [[12]](addendum.md). Applying styles directly to the element, or qualifying a slector with an element name should be considered as harmful as polluting the global name space in JavaScript. Don't do it.
