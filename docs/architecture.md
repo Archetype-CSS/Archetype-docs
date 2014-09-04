@@ -76,14 +76,21 @@ These are the basic concepts Archetype modules are built on. Also see: [Archetyp
 ### Utilities
 Archetype utilities are low-level abstractions used globally throughout a design system via a class, function, or mixin to provide specific functionality. Utilities are maintained within their own repository, managed with [Bower](http://bower.io), and are `@import`-ed within `main.scss`. All utilities are prefixed with `Archetype-u-`. They are installed using `bower install Archetype-u-[utility-Name]`. Utilities are applied within the stylesheets, rather than the markup. They reside within `bower_components` once installed.
 
+Example [Archetype Components](https://github.com/Archetype-CSS?query=Archetype-u-)
+
 ### Objects
 Object styles are generic abstractions that can be extended to build a component. They are styles which remain consistent and unchanged within a component regardless of skin or structure and are abstracted to be used as a foundation for building UI components. The classic OOCSS example is the media-object [[16]](addendum). Each object is maintained within its own repository, managed with [Bower](http://bower.io), and `@import`-ed into `main.scss`. All objects are prefixed with `Archetype-o-`. They are installed using `bower install Archetype-o-[object-name]`. They reside within `bower_components` once installed.
+
+Example [Archetype Components](https://github.com/Archetype-CSS?query=Archetype-o-)
 
 #### Object Modifiers
 An object modifier in Archetype is a context-dependant sibling of an object that performs a certain function and is represented by an additional HTML class attribute on the element. Object modifiers are denoted by the use of `__` (double underscores) for example, `.objectName__modifierName` in order to maintain context, maintain control of the cascade, and avoid location-dependant selectors [[2]](addendum.md). Object modifiers extend or provide minor overrides to the object and is often applied to the same HTML element or a direct decendent. An object modifier is defined in the same partial as the object it modifies. 
 
 ### Components
+
 A discrete and independent entity designed to exist as a stand alone module without any dependencies to its container. A component can be simple or compound (contain one or more components) and it should be able to be relocated on the page without breaking [[1]](addendum). Example components include buttons, navigation, etc. An example of a compound component would be a search block composed of an input and a submit button [[2]](addendum.md), but these are still considered components. Components are unique in the way that they are installed via [Bower](http://bower.io), but can still be modified to accept custom styles. This is done by redefining the components settings file (which contains a [Sass Map](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps) of all the CSS property value pairs passed to the component). The partial containing a component's redefined settings should be properly namespaced and located in the `components` directory. 
+
+Example [Archetype Components](https://github.com/Archetype-CSS?query=Archetype-c-)
 
 In order to maintain modularity a component must adhere to the following:
 
@@ -93,7 +100,7 @@ In order to maintain modularity a component must adhere to the following:
   * Selectors must remain context free and un-coupled to HTML by avoiding the use of elements within CSS selectors. HTML element styles are scoped by placing a class on either the element itself or on a parent container. This means all HTML element styles are opt-in (opposed to opt-out) making the only "default" HTML element styles are those applied by [normalize](http://necolas.github.io/normalize.css/), thus avoiding redundant overrides. [[27]](addendum.md) [[28]](addendum.md)
 
 #### State
-A state is a variant of a component that is triggered by an action or behavior. State styles are applied dynamically as an additional HTML class attribute on the component's root or child HTML element. State based styles are indicated with the `is-` prefix, for example `.is-active` or `.is-disabled`. These style declarations are shared by CSS and JS files [[1]](addendum.md) and are defined with the component in the same partial. Multiple states may be used at once on the same component.
+A state is a variant of a component that is triggered by an action or behavior. State styles are applied dynamically as an additional HTML class attribute on the component's root or child HTML element. State based styles are indicated with the `is-` prefix, for example `.is-active` or `.is-disabled`. These style declarations are shared by CSS and JS files [[1]](addendum.md) and are defined with the component in the same partial. Multiple states may be used at once on the same component. In Archetype, state styles are defined in the same component partial of which they modify. For a good sample, see: [Archetype-c-button](https://github.com/Archetype-CSS/Archetype-c-button)
 
 
 ## Component Composition (OOCSS Classes)
@@ -155,7 +162,7 @@ Class names should remain content-independent[[3]](addendum.md). By avoiding tig
 The important distinction is that the HTML class attributes are semantic in the way they convey meaning to the developer, rather than the content. Content receives it's semantic value from its markup (HTML tags and ARIA attributes). Code receives its semantic value from its classes.
 
 
-## Selector Construct and Naming Conventions
+### Selector Construct and Naming Conventions
 Selector construct must explicitly communicate the context and function of the entity being named. Also, selector construct must be consistently applied to allow for efficient use of grep and more meaningful diffs. The BEM Methodology [[2]](addendum.md) and interpretations of BEM [[3]](addendum.md) [[13]](addendum.md) [[26]](addendum.md) make use of an efficient system to accomplish these goals by explicitly communicating the function and context of the entity being named, as well as its relationship to both child and parent components while avoiding deeply nested selectors that tie content to container and make assumptions about markup. In this way, a BEM-like system helps to reinforce our primary objective of modularity.
 Admittedly, there is an element of added complexity, but the sacrifice of simple selectors in order to preserve objected oriented principles is well worth it, especially considering that the GZIP algorythm handles repetition extremely well.
 
@@ -166,27 +173,49 @@ An effective naming convention explicitly communicates the context and function 
 This naming pattern is inspired by the BEM Methodology [[2]](addendum.md) as well as several interpretations by other developers [[3]](addendum.md) [[26]](addendum.md).
 
 **Object:** represents the higher-level abstraction of a component 
+
+Naming Pattern:
 <pre>
 <code>
 .o-objectName {...}
 </code>
 </pre>
+Example:
+
+{{ insert idio template call to nav object here }}
 
 **Object Modifier:** a minor modification of an object
+
+Naming Pattern:
+
 <pre>
 <code>
 .o-object__objectModifier {...}
 </code>
 </pre>
 
-**Object Extension:** extends a component with a skin or structure 
+Example:
+
+{{ insert idio template call to nav__vertical object modifier here }}
+
+
+**Component:** multi-class pattern for creating discrete UI modules 
+
+Naming Pattern:
+
 <pre>
-<code>
-.component--extension {...}       
-</code>
+.primaryNav {...}
+.primaryNav__item {...}
 </pre>
 
+Example:
+
+{{ insert idio template call to component example (button?) here }}
+
 **State:** represents a change in the component's state
+
+Naming Pattern:
+
 <pre>
 <code>
 .component--extension {
@@ -195,134 +224,17 @@ This naming pattern is inspired by the BEM Methodology [[2]](addendum.md) as wel
 </code>
 </pre>
 
+Example:
 
-**Example:**
+{{ insert idio template call to button component here }}
+
+
+
+**Component Extension:** used to apply skin and/or structure styles to a component
+
+Naming Pattern:
+
 <pre>
-<code>
-<button class="o-button o-button__full button--large button--danger is-disabled">A button</button>  
-</code>
-</pre>
-
-### Component
-
-```scss
-.primaryNav {...}
-.primaryNav__item {...}
-```
-
-Example HTML:
-```html
-<ul class="o-nav o-nav__vertical primaryNav">     /* component */
-  <li class="primaryNav__item">Nav Item</li>      /* sub component */
-</ul>
-
-```
-
-### State
-
-Example:
-```html
- <button type="submit" class="btn btn--large btn--primary is-disabled">Submit</button>
-```
-Example:
-```html
-<ul class="nav nav__vertical primaryNav--large primaryNav--primary">
-  <li class="primaryNav__item is-active">...</li>
-</ul>
-```
-
-### Layout
-
-Example:
-```scss
-.l-primaryNav {
-  // primaryNav layout styles here
-}
-```
-
-Example HTML:
-```html
-<ul class="nav nav__vertical primaryNav--large primaryNav--primary l-primaryNav">
-  <li class="primaryNav__item is-active">...</li>
-</ul>
-
-```
-
-### Icons
-
-Example:
-```html
-<span class="i-account">My Account</span>
-```
-
-
-### JavaScript
-
-Example:
-```js
-<ul class="nav nav__vertical primaryNav--large primaryNav--primary l-primaryNav" data-nav="primaryNav">
-  <li class="primaryNav__item is-active">...</li>
-</ul>
-
-```
-
-
-### QA
-
-Example:
-```html
-<button id="qa-1234" class="btn btn--large btn--success">Click Here Stupid</button>
-```
-
-### Objects
-
-Example:
-```scss
-.o-objectName {...}
-```
-
-Practical Example:
-```scss
-.o-nav {...}
-```
-
-Example HTML:
-```html
-<ul class="o-nav">
-...
-</ul>
-```
-
-### Sub Objects
-
-Example:
-```scss
-.o-objectName__subObjectName {...}
-```
-
-Example HTML:
-```html
-<ul class="o-objectName o-objectName__subObjectName">
-  ...
-</ul>
-```
-
-Practical Example:
-```scss
-.o-nav__vertical {...}
-```
-
-Example HTML:
-```html
-<ul class="o-nav o-nav__vertical">
-...
-</ul>
-```
-
-### Component Extension
-
-Example:
-```scss
 .primaryNav--structure {
   // structure styles extending the primaryNav component
 }
@@ -330,7 +242,53 @@ Example:
 .primaryNav--skin {
   // skin styles extending the primaryNav component
 }
+</pre>
+
+Example:
+
+{{ insert idio template call to component extension example (button?) here }}
+
+
+**Layout:** styles that define how and where a component is placed on the page
+
+Naming Pattern:
+
+<pre>
+.l-primaryNav {
+  // primaryNav layout styles here
+}
+</pre>
+
+Example:
+
+{{ insert idio template call to component example (button?) here }}
+
+
+### Icons
+
+Example:
+
+```
+<span class="i-account">My Account</span>
 ```
 
-## Examples:
+### JavaScript
 
+Example:
+
+<pre>
+<code>
+<ul class="nav nav__vertical primaryNav--large primaryNav--primary l-primaryNav" data-nav="primaryNav">
+  <li class="primaryNav__item is-active">...</li>
+</ul>
+</code>
+</pre>
+
+
+### QA
+
+Example:
+
+```
+<button id="qa-1234" class="btn btn--large btn--success">Click Here Stupid</button>
+```

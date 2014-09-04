@@ -19,3 +19,7 @@ wish list:
 
 ## [Archetype Visual Unit Tests](/tests.html)
 
+5. Testable
+    * Test for coding standard compliance
+    * Test for visual regression (unit level)
+    * Test for redundancies
